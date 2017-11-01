@@ -1,7 +1,6 @@
 const hapi = require("hapi");
 const server = new hapi.Server();
-const routes = require("./routes");
-console.log(routes);
+const api = require("./api");
 
 server.connection({
   port: 6001,
@@ -10,9 +9,12 @@ server.connection({
   router: { stripTrailingSlash: true }
 });
 
-server.route(routes);
-
-server.start(err => {
-  if (err) throw err;
-  console.log(`Server started at ${server.info.uri}`);
+server.register([
+  { register: api }
+], () => {
+  server.start(err => {
+    if (err) throw err;
+    console.log(`Server started at ${server.info.uri}`);
+  })
 })
+

@@ -3,5 +3,7 @@ module.exports = [
   require("./fetchMovie"),
   require("./fetchAllMovies"),
   require("./removeMovie"),
-  require("./updateMovie")
+  require("./updateMovie"),
+  require("./addActor"),
+  require("./removeActor")
 ]

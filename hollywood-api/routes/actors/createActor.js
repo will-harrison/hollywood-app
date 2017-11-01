@@ -1,7 +1,11 @@
 module.exports = {
-  method: "GET",
-  path: "/",
+  method: "POST",
+  path: "/api/actors",
   handler: function (request, reply) {
-    reply();
+    let actor = new this.models.Actor(request.payload);
+    actor
+      .save()
+      .then(res => reply(res))
+      .catch(err => reply(err));
   }
 }
