@@ -6,6 +6,6 @@ module.exports = {
     movie
       .save()
       .then(res => reply(res))
-      .catch(err => reply(err));
+      .catch(err => { console.log(err); reply(err) });
   }
 }
