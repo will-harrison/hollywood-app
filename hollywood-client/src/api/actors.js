@@ -39,23 +39,3 @@ export const update = (id, data) => {
     .then(res => res.json())
     .catch(err => console.log(err));
 }
-
-export const addActor = (id, data) => {
-  return fetch(BASEURL(`${id}/actor`), {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-  })
-    .then(res => res.json())
-    .catch(err => console.log(err));
-}
-
-export const removeActor = (id, data) => {
-  return fetch(BASEURL(`${id}/actor`), {
-    method: "DELETE",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-  })
-    .then(res => res.json())
-    .catch(err => console.log(err));
-}

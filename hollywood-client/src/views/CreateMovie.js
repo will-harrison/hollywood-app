@@ -9,7 +9,7 @@ class CreateMovie extends Component {
         title: "",
         summary: "",
         rottenTomatoes: "",
-        rating: "",
+        rating: "G",
         poster: ""
       }
     }
@@ -40,31 +40,38 @@ class CreateMovie extends Component {
         <form onSubmit={this.onFormSubmit}>
           <input
             name={"title"}
-            value={this.state.title}
+            value={this.state.movie.title}
             placeholder={"Title"}
             onChange={this.onInputChange}
             autoFocus />
           <input
             name={"summary"}
-            value={this.state.summary}
+            value={this.state.movie.summary}
             placeholder={"Summary"}
             onChange={this.onInputChange} />
           <input
             name={"rottenTomatoes"}
-            value={this.state.rottenTomatoes}
+            value={this.state.movie.rottenTomatoes}
             placeholder={"Rotten Tomatoes Score"}
             onChange={this.onInputChange}
             type={"number"}
             min={0}
             max={100} />
-          <input
+          <select
             name={"rating"}
-            value={this.state.rating}
-            placeholder={"Rating"}
-            onChange={this.onInputChange} />
+            value={this.state.movie.rating}
+            onChange={this.onInputChange}
+            required>
+            <option value={"G"}>G</option>
+            <option value={"PG"}>PG</option>
+            <option value={"PG-13"}>PG-13</option>
+            <option value={"R"}>R</option>
+            <option value={"NC-17"}>NC-17</option>
+            <option value={"NR"}>NR</option>
+          </select>
           <input
             name={"poster"}
-            value={this.state.poster}
+            value={this.state.movie.poster}
             placeholder={"Poster"}
             onChange={this.onInputChange} />
           <input type="submit" />
