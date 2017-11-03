@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Card } from 'antd';
 import api from '../api';
 
 class Movies extends Component {
@@ -38,11 +39,14 @@ class Movies extends Component {
         <h2>Movies</h2>
         {error && <div>{error}</div>}
         {actors.map(a => (
-          <div key={a.id} style={styles.actor}>
-            <Link to={`/actors/${a.id}`}>
-              <div style={styles.title}>{a.name} &mdash; {a.movies.length} Movies</div>
-            </Link>
-          </div>
+          <Card key={a.id} style={styles.actor}>
+            <div style={styles.card}>
+              <div><img src={a.headshot} alt={a.name} style={styles.image} /></div>
+              <Link to={`/actors/${a.id}`}>
+                <div style={styles.title}>{a.name} &mdash; {a.movies.length} Movies</div>
+              </Link>
+            </div>
+          </Card>
         ))}
       </div>
     );
@@ -50,17 +54,27 @@ class Movies extends Component {
 }
 
 const styles = {
+
   container: {
     margin: "50px 150px"
+  },
+  card: {
+    display: "flex",
+    flexDirection: "row",
   },
   actor: {
     marginTop: 10,
   },
   title: {
-    fontSize: 20
+    fontSize: 20,
+    marginLeft: 10,
+    // display: "flex",
+    // flexDirection: "column",
+    justifyContent: "center"
   },
   image: {
-    height: 200
+    width: 100,
+    borderRadius: 3
   }
 }
 

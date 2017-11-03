@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Card, Button } from 'antd';
 import api from '../api';
 
 class MovieDetails extends Component {
@@ -52,27 +53,40 @@ class MovieDetails extends Component {
     let { movie, error } = this.state;
     return (
       <div style={styles.container}>
+        <Link to={`/movies`}>Back</Link>
         {error && <div>{error}</div>}
         {!error && (
-          <div>
+          <Card style={styles.card}>
             <div style={styles.title}>{movie.title}</div>
             <div>(Rated: {movie.rating})</div>
             <p>{movie.summary}</p>
+            <div><img style={styles.image} src={movie.poster} alt={movie.title} /></div>
+            <div style={styles.container}>
+              <div>
+                <div>Written by</div>
+                <div>{movie.writer}</div>
+              </div>
+              <div>
+                <div>Directed by</div>
+                <div>{movie.director}</div>
+              </div>
+            </div>
+            <div>Release: {movie.releaseDate}</div>
             <div>{movie.rottenTomatoes > 80
               ? <img src="https://staticv2-4.rottentomatoes.com/static/images/icons/fresh-16.png" alt="Fresh" />
               : <img src="https://staticv2-4.rottentomatoes.com/static/images/icons/splat-16.png" alt="Rotten" />}
               &nbsp;&nbsp;{movie.rottenTomatoes}%
               </div>
-            <div><img style={styles.image} src={movie.poster} alt={movie.title} /></div>
-            <button onClick={this.setUpdate}>Update</button>
-            <button onClick={this.removeMovie}>Delete</button>
+            <Button style={styles.button} onClick={this.setUpdate}>Update</Button>
+            <Button style={styles.button} onClick={this.removeMovie}>Delete</Button>
             <hr />
+            <div>Cast</div>
             {movie.actors && movie.actors.map(actor => (
               <div key={actor.id}>
                 <Link to={`/actors/${actor.id}`}>{actor.name}</Link>
               </div>
             ))}
-          </div>
+          </Card>
         )}
       </div>
     );
@@ -81,7 +95,12 @@ class MovieDetails extends Component {
 
 const styles = {
   container: {
-    margin: "50px 150px"
+    display: "flex",
+    justifyContent: "center",
+    padding: 20
+  },
+  card: {
+    width: 500
   },
   movie: {
     marginTop: 10,
@@ -90,7 +109,12 @@ const styles = {
     fontSize: 40
   },
   image: {
-    height: 200
+    height: 400,
+    display: "flex",
+    margin: "0 auto"
+  },
+  button: {
+    margin: "15px 5px"
   }
 }
 

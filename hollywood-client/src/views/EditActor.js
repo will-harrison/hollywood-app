@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, Input, Button, Select } from 'antd';
 import api from '../api';
 
 class EditActor extends Component {
@@ -8,7 +9,8 @@ class EditActor extends Component {
       actor: {
         name: "",
         age: "",
-        gender: "female"
+        gender: "female",
+        headshot: ""
       }
     }
   }
@@ -54,34 +56,59 @@ class EditActor extends Component {
   render() {
     let { actor, error } = this.state;
     return (
-      <div>
+      <div style={styles.container}>
         {error && <div>{error}</div>}
         {!error && (
-          <form onSubmit={this.onFormSubmit}>
-            <input
-              name={"name"}
-              value={actor.name}
-              placeholder={"Name"}
-              onChange={this.onInputChange}
-              autoFocus />
-            <input
-              name={"age"}
-              value={actor.age}
-              placeholder={"Age"}
-              onChange={this.onInputChange} />
-            <select
-              name={"gender"}
-              value={actor.gender}
-              onChange={this.onInputChange}
-              required>
-              <option value={"male"}>Male</option>
-              <option value={"female"}>Female</option>
-            </select>
-            <input type="submit" />
-          </form>
+          <Form style={styles.form} onSubmit={this.onFormSubmit}>
+            <Form.Item label={"Name"}>
+              <Input
+                name={"name"}
+                value={actor.name}
+                placeholder={"Name"}
+                onChange={this.onInputChange}
+                autoFocus />
+            </Form.Item>
+            <Form.Item label={"Headshot"}>
+              <Input
+                name={"headshot"}
+                value={actor.headshot}
+                placeholder={"Headshot"}
+                onChange={this.onInputChange} />
+            </Form.Item>
+            <Form.Item label={"Age"}>
+              <Input
+                name={"age"}
+                value={actor.age}
+                placeholder={"Age"}
+                onChange={this.onInputChange} />
+            </Form.Item>
+            <Form.Item label={"Gender"}>
+              <Select
+                name={"gender"}
+                value={actor.gender}
+                onChange={this.onInputChange}
+                required>
+                <option value={"male"}>Male</option>
+                <option value={"female"}>Female</option>
+              </Select>
+            </Form.Item>
+            <Form.Item>
+              <Input type="submit" />
+            </Form.Item>
+          </Form>
         )}
       </div>
     );
+  }
+}
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  form: {
+    width: 500
   }
 }
 

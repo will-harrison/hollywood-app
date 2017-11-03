@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import api from '../api';
 
@@ -45,26 +46,47 @@ class ActorDetails extends Component {
   render() {
     let { actor, error } = this.state;
     return (
-      <div>
+      <div style={styles.container}>
         {error && <div>{error}</div>}
         {!error && (
-          <div>
-            <div>{actor.name}</div>
+          <Card style={styles.actor}>
+            <div style={styles.name}>{actor.name}</div>
+            <div><img style={styles.headshot} src={actor.headshot} alt={actor.name} /></div>
             <div>{actor.age}</div>
             <div>{actor.gender}</div>
-            <button onClick={this.setUpdate}>Update</button>
-            <button onClick={this.removeActor}>Delete</button>
-
+            <Button style={styles.button} onClick={this.setUpdate}>Update</Button>
+            <Button style={styles.button} onClick={this.removeActor}>Delete</Button>
             <hr />
+            <h3>Movies</h3>
             {actor.movies && actor.movies.map(m => (
               <div key={m.id}>
                 <Link to={`/movies/${m.id}`}>{m.title}</Link>
               </div>
             ))}
-          </div>
+          </Card>
         )}
       </div>
     );
+  }
+}
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  actor: {
+    marginTop: 50
+  },
+  name: {
+    fontSize: 24,
+    padding: 20
+  },
+  headshot: {
+    height: 300
+  },
+  button: {
+    margin: "15px 5px"
   }
 }
 

@@ -3,7 +3,8 @@ module.exports = (db) => {
   const Actor = db.createModel("Actor", {
     name: type.string().required(),
     age: type.number().required(),
-    gender: type.string().enum(["male", "female"]).required()
+    gender: type.string().enum(["male", "female"]).required(),
+    headshot: type.string().optional()
   });
   return Actor;
 }
