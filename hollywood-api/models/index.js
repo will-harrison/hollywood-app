@@ -2,7 +2,9 @@ const thinky = require("thinky");
 const config = require('../config');
 
 const db = thinky({
-  db: config.dbName
+  name: config.db.name,
+  port: config.db.port,
+  host: config.db.host,
 });
 
 const Actor = require("./actor")(db);

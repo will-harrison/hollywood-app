@@ -1,4 +1,4 @@
-const BASEURL = (path = "") => `http://localhost:6001/api/movies/${path}`;
+const BASEURL = (path = "") => `https://hollywood-api-tyrepaqott.now.sh/api/movies/${path}`;
 
 export const getById = (id) => {
   return fetch(BASEURL(id))
